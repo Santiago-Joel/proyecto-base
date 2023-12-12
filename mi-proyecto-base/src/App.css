@@ -1,6 +1,12 @@
 .main{
     min-height: 90vh;
 }
+#error404{
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 0;
+    margin-right: 0;
+}
 .error-img{
     max-width: 500px;
     max-height: auto;

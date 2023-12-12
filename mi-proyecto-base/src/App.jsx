@@ -9,7 +9,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import  {getProducts}  from "./utils/index";
 import { useEffect, useState } from "react";
 import RoutesPrivates from "./routes/RoutesPrivates";
-import AddProduct from "./components/AddProduct";
+import AddProduct from "./views/AddProduct";
 import Admin from "./views/Admin";
 import Login from "./views/Login";
 function App() {
@@ -44,7 +44,7 @@ function App() {
         </Route>
         <Route path='/nosotros' element={<About/>}/>
         <Route path='/ingresar' element={<Login setUser={setUser}/>}/>
-        <Route path='*/' element={<ErrorScreen />}/>
+        <Route path='/*' element={<ErrorScreen />}/>
       </Routes>
       <Footer />
     </BrowserRouter>
