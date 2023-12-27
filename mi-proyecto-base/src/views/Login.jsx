@@ -1,15 +1,22 @@
-import { useForm } from "react-hook-form";
-import {Button,Form,FormControl,FormGroup, FormText} from "react-bootstrap";
-import {getUsers} from "../utils"
-const Login = ({setUser}) => {
-    const {register,handleSubmit,formState:{errors},reset}= useForm();
+import { useForm } from "react-hook-form"
+import { useContext } from "react";
+import {Button,Form,FormControl,FormGroup} from 'react-bootstrap';
+import {getUsers} from '../utils';
+import UserContext from "../components/ContextUser";
+
+
+const Login = () => {
+
+    const {user,setUser}=useContext(UserContext);
+    const {register,handleSubmit,formState:{errors},reset} = useForm();
     const login=async(user)=>{
-        let users = await getUsers();
-        let objUser={};
+        let users= await getUsers();
+        let objUser = {};
         users.map((myUser)=>{
-            if(myUser.email===user.email && myUser.password===user.password){
+            if((myUser.email===user.email) && (myUser.password===user.password)){
                 objUser = myUser
             }
+           
         })
         if(objUser.admin!=undefined){
             setUser(objUser)
@@ -21,25 +28,25 @@ const Login = ({setUser}) => {
             <Form.Label>
                 Email
             </Form.Label>
-            <FormControl
+            <FormControl 
             type="text"
             {...register("email",{required:"Este campo es obligatorio"})}
             />
-            <FormText>
+            <Form.Text>
                 {errors.email?.message}
-            </FormText>
+            </Form.Text>
         </FormGroup>
         <FormGroup>
             <Form.Label>
-                Contraseña
+                Clave
             </Form.Label>
-            <FormControl
+            <FormControl 
             type="password"
             {...register("password",{required:"Este campo es obligatorio"})}
             />
-            <FormText>
+            <Form.Text>
                 {errors.password?.message}
-            </FormText>
+            </Form.Text>
         </FormGroup>
         <FormGroup>
             <Button type="submit">Ingresar</Button>

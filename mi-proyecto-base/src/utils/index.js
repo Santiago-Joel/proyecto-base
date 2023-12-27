@@ -1,5 +1,5 @@
 let URLproducts = "http://localhost:3000/products";
-let URLusers = "http://localhost:3000/users"
+let URLuser ="http://localhost:3000/users";
 import axios from 'axios';
 export const getProducts=async()=>{
     try {
@@ -14,21 +14,49 @@ export const getProducts=async()=>{
     } catch (error) {
         console.log(error);
         return []
-        // console.log(error.request);
     }
 }
 export const getUsers=async()=>{
     try {
-        let Users= await axios.get(URLusers);
-        if (Users.status===200) {
-            return Users.data
+        let users= await axios.get(URLuser);
+        if (users.status===200) {
+            return users.data
             
         }else{
             return []
         }
+
     } catch (error) {
         console.log(error);
         return []
-        // console.log(error.request);
     }
-}    
+}
+export const addProduct=async(obj)=>{
+    try {
+       let add= await axios.post(URLproducts,obj);
+       if (add.status==201) {
+            return true
+       }else{
+        alert("estamos en index")
+       }
+
+    } catch (error) {
+        return false
+    }
+
+}
+export const getOneProduct=async(id)=>{
+    try {
+        let product= await axios.get(`${URLproducts}/${id}`);
+        if (product.status===200) {
+            return product.data
+            
+        }else{
+            return null
+        }
+
+    } catch (error) {
+       
+        return null
+    }
+}
